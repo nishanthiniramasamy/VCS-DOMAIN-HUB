@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCS-DOMAIN-HUB</title>
+     <link href="assets/css/search.css" rel="stylesheet">
+</head>
+<body>
+     <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <span class="vcs">VCS</span><span class="domain">-domain-</span><span class="hub">HUB</span>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav>
+            <a href="search.html">DOMAIN PURCHASE</a>
+            <a href="hosting.html">HOSTING</a>
+            <a href="shoppingsystem.html">SHOPPING SYSTEM</a>
+            <a href="websitebuilder.html">WEBSITE BUILDER</a>
+            <a href="sslcertificates.html">SSL CERTIFICATES</a>
+            <a href="support.html">SUPPORT</a>
+        </nav>
+        
+        <!-- Desktop Auth Buttons -->
+        <div class="auth-buttons">
+            <button class="btn btn-outline" onclick="openModal('login')">Login</button>
+            <button class="btn btn-primary" onclick="openModal('signup')">Sign Up</button>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="search.html">DOMAIN PURCHASE</a>
+        <a href="hosting.html">HOSTING</a>
+        <a href="websitebuilder.html">WEBSITE BUILDER</a>
+        <a href="sslcertificates.html">SSL CERTIFICATES</a>
+        <a href="support.html">SUPPORT</a>
+        
+        <div class="mobile-auth-buttons">
+            <button class="btn btn-outline" onclick="openModal('login'); closeMobileNav()">Login</button>
+            <button class="btn btn-primary" onclick="openModal('signup'); closeMobileNav()">Sign Up</button>
+        </div>
+    </nav>
+
+    <!--MAIN-->
+
+     <!-- Main Container -->
+    <div class="container">
+       
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+        
+            <!-- Cart -->
+            <div class="cart" onclick="toggleCart()">
+                🛒 CART ( <span id="cart-count">0</span> ) $ <span id="cart-total">0.00</span>
+            </div>
+        </div>
+
+        <!-- Single Domain Search -->
+        <div id="single-section" class="content-section active">
+            <h1 class="section-title">Find Your Perfect Domain</h1>
+            <p class="section-subtitle">Search for available domains across multiple extensions and secure your online presence today.</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Enter your desired domain name..." id="domainInput">
+                <select class="extension-select" id="extensionSelect">
+                    <option value=".com">.com</option>
+                    <option value=".net">.net</option>
+                    <option value=".org">.org</option>
+                    <option value=".io">.io</option>
+                    <option value=".ai">.ai</option>
+                    <option value=".co">.co</option>
+                    <option value=".dev">.dev</option>
+                    <option value=".app">.app</option>
+                    <option value=".tech">.tech</option>
+                </select>
+                <button class="search-btn" onclick="searchDomain()">SEARCH DOMAINS</button>
+            </div>
+
+            <div class="tld-pills">
+                <div class="tld-pill active" onclick="selectTLD('.com')">.com</div>
+                <div class="tld-pill" onclick="selectTLD('.net')">.net</div>
+                <div class="tld-pill" onclick="selectTLD('.org')">.org</div>
+                <div class="tld-pill" onclick="selectTLD('.io')">.io</div>
+                <div class="tld-pill" onclick="selectTLD('.ai')">.ai</div>
+                <div class="tld-pill" onclick="selectTLD('.co')">.co</div>
+                <div class="tld-pill" onclick="selectTLD('.dev')">.dev</div>
+                <div class="tld-pill" onclick="selectTLD('.app')">.app</div>
+                <div class="tld-pill" onclick="selectTLD('.tech')">.tech</div>
+                <div class="tld-pill" onclick="showAllTLDs()">All TLDs</div>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+          <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <h2>Your Domain Cart</h2>
+            <p>Review your selected domains before checkout</p>
+            <div id="cartItems"></div>
+            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 2px solid #eee;">
+                <h3>Total: $<span id="modalCartTotal">0.00</span></h3>
+                <button class="search-btn" style="width: 100%; margin-top: 1rem;" onclick="proceedToCheckout()">PROCEED TO CHECKOUT</button>
+                <button class="btn-login" style="width: 100%; margin-top: 0.5rem; text-align: center; display: block;" onclick="closeCart()">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Checkout Modal -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <button class="checkout-close" onclick="closeCheckout()">&times;</button>
+                <h2>🛡️ Secure Checkout</h2>
+                <p>Complete your domain registration securely</p>
+            </div>
+            
+            <div class="checkout-body">
+                <!-- Progress Steps -->
+                <div class="checkout-steps">
+                    <div class="step active" id="step1">
+                        <div class="step-number">1</div>
+                        <span>Order Review</span>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-number">2</div>
+                        <span>Contact Info</span>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-number">3</div>
+                        <span>Payment</span>
+                    </div>
+                    <div class="step" id="step4">
+                        <div class="step-number">4</div>
+                        <span>Confirmation</span>
+                    </div>
+                </div>
+
+                <!-- Step 1: Order Review -->
+                <div class="checkout-section active" id="section1">
+                    <h3>📋 Order Summary</h3>
+                    <div class="order-summary">
+                        <div id="checkoutOrderItems">
+                            <!-- Dynamic order items will be inserted here -->
+                        </div>
+                    </div>
+                    
+                    <h4>💎 Additional Services</h4>
+                    <div class="form-grid">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" id="whoisPrivacy" onchange="updateTotal()">
+                            <div>
+                                <strong>WHOIS Privacy Protection</strong><br>
+                                <small>Keep your personal information private (+$9.99/year)</small>
+                            </div>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" id="autoRenew" onchange="updateTotal()">
+                            <div>
+                                <strong>Auto-Renewal</strong><br>
+                                <small>Never lose your domain (FREE)</small>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 2: Contact Information -->
+                <div class="checkout-section" id="section2">
+                    <h3>👤 Contact Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>First Name *</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name *</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+                    
+                    <h4>🏠 Address Information</h4>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Address Line 1 *</label>
+                            <input type="text" id="address1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Address Line 2</label>
+                            <input type="text" id="address2">
+                        </div>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>City *</label>
+                            <input type="text" id="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label>State/Province *</label>
+                            <input type="text" id="state" required>
+                        </div>
+                        <div class="form-group">
+                            <label>ZIP/Postal Code *</label>
+                            <input type="text" id="zipCode" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Country *</label>
+                            <select id="country" required>
+                                <option value="">Select Country</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="AU">Australia</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="IN">India</option>
+                                <option value="JP">Japan</option>
+                                <option value="BR">Brazil</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Payment Information -->
+                <div class="checkout-section" id="section3">
+                    <h3>💳 Payment Method</h3>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method active" onclick="selectPaymentMethod('card')">
+                            <div style="font-size: 2rem;">💳</div>
+                            <div>Credit Card</div>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('paypal')">
+                            <div style="font-size: 2rem;">🏦</div>
+                            <div>PayPal</div>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('crypto')">
+                            <div style="font-size: 2rem;">₿</div>
+                            <div>Crypto</div>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('bank')">
+                            <div style="font-size: 2rem;">🏛️</div>
+                            <div>Bank Transfer</div>
+                        </div>
+                    </div>
+
+                    <div id="cardPayment" class="payment-form">
+                        <div class="form-grid">
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label>Card Number *</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Cardholder Name *</label>
+                                <input type="text" id="cardName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Expiry Date *</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Security Code *</label>
+                                <input type="text" id="cardCVC" placeholder="123" maxlength="4" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="saveCard">
+                                Save this card for future purchases (secure)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="paypalPayment" class="payment-form" style="display: none;">
+                        <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🏦</div>
+                            <h4>PayPal Payment</h4>
+                            <p>You will be redirected to PayPal to complete your payment securely.</p>
+                        </div>
+                    </div>
+
+                    <div id="cryptoPayment" class="payment-form" style="display: none;">
+                        <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">₿</div>
+                            <h4>Cryptocurrency Payment</h4>
+                            <p>We accept Bitcoin, Ethereum, and other major cryptocurrencies.</p>
+                            <select style="margin-top: 1rem; padding: 0.5rem;">
+                                <option>Bitcoin (BTC)</option>
+                                <option>Ethereum (ETH)</option>
+                                <option>Litecoin (LTC)</option>
+                                <option>Bitcoin Cash (BCH)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="bankPayment" class="payment-form" style="display: none;">
+                        <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🏛️</div>
+                            <h4>Bank Transfer</h4>
+                            <p>Bank transfer instructions will be provided after order confirmation.</p>
+                            <small>Note: Processing may take 1-3 business days</small>
+                        </div>
+                    </div>
+
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <span>🔒</span>
+                            SSL Secured
+                        </div>
+                        <div class="security-badge">
+                            <span>🛡️</span>
+                            PCI Compliant
+                        </div>
+                        <div class="security-badge">
+                            <span>✅</span>
+                            256-bit Encryption
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Confirmation -->
+                <div class="checkout-section" id="section4">
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="font-size: 4rem; color: #28a745; margin-bottom: 1rem;">✅</div>
+                        <h3>Order Confirmed!</h3>
+                        <p>Thank you for your purchase. Your domains are being processed.</p>
+                        
+                        <div style="background: #f8f9fa; border-radius: 10px; padding: 1.5rem; margin: 2rem 0; text-align: left;">
+                            <h4>📧 What's Next?</h4>
+                            <ul style="margin: 1rem 0; padding-left: 1rem;">
+                                <li>Confirmation email sent to your inbox</li>
+                                <li>Domain activation (usually within 1 hour)</li>
+                                <li>DNS management panel access</li>
+                                <li>Free domain management tools</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; justify-content: center;">
+                            <button class="btn-primary" onclick="downloadReceipt()">📄 Download Receipt</button>
+                            <button class="btn-secondary" onclick="manageDomains()">⚙️ Manage Domains</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="checkout-actions">
+                    <button class="btn-secondary" id="prevBtn" onclick="previousStep()" style="display: none;">← Previous</button>
+                    <button class="btn-primary" id="nextBtn" onclick="nextStep()">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+     <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            
+            <!-- Tab Navigation -->
+            <div class="tab-nav">
+                <button class="tab-btn" id="loginTab" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn" id="signupTab" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <div class="form-content" id="loginForm">
+                <div class="form-container">
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" class="form-input" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Login</button>
+                        <div class="form-footer">
+                            Forgot your password? <a href="#" onclick="handleForgotPassword()">Reset it</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div class="form-content" id="signupForm">
+                <div class="form-container">
+                    <form onsubmit="handleSignup(event)">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email</label>
+                            <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" class="form-input" placeholder="Create a password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Sign Up</button>
+                        <div class="terms-text">
+                            By signing up, you agree to our <a href="#" onclick="showTerms()">Terms & Conditions</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/search.js"></script>
+</body>
+</html>
